@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugar & Bloom - Handcrafted Cakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #2C2C2C;
+            line-height: 1.7;
+            background-color: #F5F3F0;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 4.5rem;
+            font-weight: 400;
+            line-height: 1.1;
+            color: #2C2C2C;
+            letter-spacing: 0.5px;
+        }
+
+        h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: #2C2C2C;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #2C2C2C;
+            letter-spacing: 0.2px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #F5F3F0 0%, #FAF8F5 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(107, 142, 127, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(193, 125, 90, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            animation: heroFadeIn 1s ease-out;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 1.5rem;
+            font-size: 5rem;
+        }
+
+        .hero-tagline {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #A39E93;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            animation: sectionFadeIn 0.8s ease-out;
+        }
+
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        .divider {
+            width: 40px;
+            height: 2px;
+            background: #6B8E7F;
+            margin: 1.5rem auto;
+        }
+
+        /* Quiz Section */
+        #quiz-section {
+            background: white;
+        }
+
+        .quiz-wrapper {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .quiz-card {
+            background: white;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #EFEFEF;
+            animation: cardFadeIn 0.6s ease-out;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #E8E8E8;
+            padding-bottom: 2rem;
+        }
+
+        .quiz-step {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+            color: #A39E93;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .quiz-progress {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .progress-line {
+            width: 20px;
+            height: 1px;
+            background: #E8E8E8;
+            transition: all 0.3s ease;
+        }
+
+        .progress-line.active {
+            background: #6B8E7F;
+            width: 40px;
+        }
+
+        .progress-line.completed {
+            background: #C17D5A;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.visible {
+            display: block;
+            animation: questionFadeIn 0.5s ease-out;
+        }
+
+        @keyframes questionFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .question-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #2C2C2C;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .option-btn {
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #D8D8D8;
+            background: white;
+            border-radius: 0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #333;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+        }
+
+        .option-btn:hover {
+            border-color: #6B8E7F;
+            background: #FAFAF8;
+        }
+
+        .option-btn.selected {
+            background: #2C2C2C;
+            color: white;
+            border-color: #2C2C2C;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: 1px solid #2C2C2C;
+            background: transparent;
+            color: #2C2C2C;
+            border-radius: 0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #2C2C2C;
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .btn-back {
+            opacity: 0.6;
+        }
+
+        .recommendation {
+            background: #FAFAF8;
+            border-left: 3px solid #6B8E7F;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            animation: recSlideIn 0.6s ease-out;
+        }
+
+        @keyframes recSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .rec-label {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.85rem;
+            color: #A39E93;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .rec-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.8rem;
+            color: #2C2C2C;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .rec-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .rec-price {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            color: #C17D5A;
+            font-weight: 400;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Menu Section */
+        #menu-section {
+            background: #F5F3F0;
+        }
+
+        .menu-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .cake-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid #E0DCD8;
+        }
+
+        .cake-item:last-child {
+            border-bottom: none;
+        }
+
+        .cake-item:nth-child(even) {
+            direction: rtl;
+        }
+
+        .cake-item:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .cake-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            background: #E8E8E8;
+        }
+
+        .cake-info h3 {
+            margin-bottom: 1rem;
+        }
+
+        .cake-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .cake-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid #E0DCD8;
+            padding-top: 1.5rem;
+        }
+
+        .cake-price {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: #C17D5A;
+            font-weight: 400;
+        }
+
+        .cake-serves {
+            font-size: 0.85rem;
+            color: #A39E93;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Testimonials Section */
+        #testimonials-section {
+            background: white;
+        }
+
+        .testimonials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .testimonial {
+            padding: 2rem;
+            border: 1px solid #E8E8E8;
+            background: #FAFAF8;
+        }
+
+        .testimonial-quote {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 2.5rem;
+            color: #6B8E7F;
+            opacity: 0.3;
+            line-height: 0;
+            margin-right: 0.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: #2C2C2C;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-context {
+            font-size: 0.85rem;
+            color: #A39E93;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact Section */
+        #contact-section {
+            background: #F5F3F0;
+        }
+
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border: 1px solid #E8E8E8;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-size: 0.9rem;
+            color: #2C2C2C;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #D8D8D8;
+            background: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6B8E7F;
+            background: #FAFAF8;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #2C2C2C;
+            color: white;
+            border: 1px solid #2C2C2C;
+            border-radius: 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background: white;
+            color: #2C2C2C;
+        }
+
+        /* Footer */
+        footer {
+            background: #2C2C2C;
+            color: #A39E93;
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #A39E93;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Success Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: #2C2C2C;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-left: 3px solid #6B8E7F;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            animation: toastSlideIn 0.4s ease-out;
+            z-index: 1000;
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .question-text {
+                font-size: 1.5rem;
+            }
+
+            .cake-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cake-item:nth-child(even) {
+                direction: ltr;
+            }
+
+            .cake-image {
+                height: 250px;
+            }
+
+            .testimonials-list {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sugar & Bloom</h1>
+            <p class="hero-tagline">Handcrafted cakes for life's sweetest moments</p>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Find Your Cake</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="quiz-wrapper">
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <div class="quiz-step">STEP <span id="current-step">1</span> OF 3</div>
+                        <div class="quiz-progress">
+                            <div class="progress-line active" id="prog-1"></div>
+                            <div class="progress-line" id="prog-2"></div>
+                            <div class="progress-line" id="prog-3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question 1 -->
+                    <div class="question visible" data-question="0">
+                        <div class="question-text">What's the occasion?</div>
+                        <div class="options">
+                            <button class="option-btn" data-answer="Birthday">Birthday</button>
+                            <button class="option-btn" data-answer="Wedding">Wedding</button>
+                            <button class="option-btn" data-answer="Anniversary">Anniversary</button>
+                            <button class="option-btn" data-answer="Just Because">Just Because</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question" data-question="1">
+                        <div class="question-text">What's your flavor preference?</div>
+                        <div class="options">
+                            <button class="option-btn" data-answer="Chocolate">Chocolate</button>
+                            <button class="option-btn" data-answer="Vanilla">Vanilla</button>
+                            <button class="option-btn" data-answer="Red Velvet">Red Velvet</button>
+                            <button class="option-btn" data-answer="Lemon">Lemon</button>
+                            <button class="option-btn" data-answer="Surprise Me">Surprise Me</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question" data-question="2">
+                        <div class="question-text">What's your budget?</div>
+                        <div class="options">
+                            <button class="option-btn" data-answer="Under $50">Under $50</button>
+                            <button class="option-btn" data-answer="$50–$100">$50–$100</button>
+                            <button class="option-btn" data-answer="$100–$200">$100–$200</button>
+                            <button class="option-btn" data-answer="$200+">$200+</button>
+                        </div>
+                    </div>
+
+                    <!-- Recommendation -->
+                    <div id="recommendation-section" class="hidden">
+                        <div class="recommendation" id="recommendationBox"></div>
+                    </div>
+
+                    <div class="quiz-buttons" id="quiz-buttons">
+                        <button class="btn btn-back" id="prevBtn" style="display:none;">← Back</button>
+                        <button class="btn" id="nextBtn" disabled>Next</button>
+                    </div>
+
+                    <div class="quiz-buttons" id="result-buttons" style="display:none;">
+                        <button class="btn btn-back" onclick="restartQuiz()">Start Over</button>
+                        <button class="btn" onclick="scrollToMenu()">Explore Menu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Creations</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="menu-list">
+                <div class="cake-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80" alt="Classic Chocolate Dream" class="cake-image" loading="lazy">
+                    <div class="cake-info">
+                        <h3>Classic Chocolate Dream</h3>
+                        <p class="cake-description">Rich layers of dark chocolate cake with silky ganache and creamy buttercream. A timeless celebration of pure cocoa indulgence.</p>
+                        <div class="cake-meta">
+                            <div class="cake-price">$45</div>
+                            <div class="cake-serves">Serves 8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cake-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&fm=jpg" alt="Vanilla Elegance" class="cake-image" loading="lazy">
+                    <div class="cake-info">
+                        <h3>Vanilla Elegance</h3>
+                        <p class="cake-description">Delicate vanilla layers with fresh berries and whipped cream. A refined, understated elegance that lets the craft shine.</p>
+                        <div class="cake-meta">
+                            <div class="cake-price">$50</div>
+                            <div class="cake-serves">Serves 8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cake-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&fm=jpg" alt="Red Velvet Romance" class="cake-image" loading="lazy">
+                    <div class="cake-info">
+                        <h3>Red Velvet Romance</h3>
+                        <p class="cake-description">Luxurious red velvet with cream cheese frosting and elegant finishing touches. The perfect choice for moments that matter.</p>
+                        <div class="cake-meta">
+                            <div class="cake-price">$65</div>
+                            <div class="cake-serves">Serves 10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cake-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&fm=jpg" alt="Lemon Sunshine" class="cake-image" loading="lazy">
+                    <div class="cake-info">
+                        <h3>Lemon Sunshine</h3>
+                        <p class="cake-description">Bright lemon cake with tangy curd and fresh lemon buttercream. Vibrant and refreshing, perfect for spring celebrations.</p>
+                        <div class="cake-meta">
+                            <div class="cake-price">$55</div>
+                            <div class="cake-serves">Serves 8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cake-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&fm=jpg" alt="Wedding Masterpiece" class="cake-image" loading="lazy">
+                    <div class="cake-info">
+                        <h3>Wedding Masterpiece</h3>
+                        <p class="cake-description">Custom multi-tiered design with premium fillings and handcrafted details. Let us create something extraordinary for your most important day.</p>
+                        <div class="cake-meta">
+                            <div class="cake-price">$180+</div>
+                            <div class="cake-serves">Serves 30+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cake-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&fm=jpg" alt="Surprise Sensation" class="cake-image" loading="lazy">
+                    <div class="cake-info">
+                        <h3>Surprise Sensation</h3>
+                        <p class="cake-description">Let us choose. A wonderful surprise featuring our best seasonal flavors and a touch of artisanal creativity.</p>
+                        <div class="cake-meta">
+                            <div class="cake-price">$60</div>
+                            <div class="cake-serves">Serves 8</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>From Our Customers</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="testimonials-list">
+                <div class="testimonial">
+                    <div class="testimonial-quote">The Red Velvet cake was absolutely stunning for our anniversary. Not only was it beautiful, but every bite was perfection. Sugar & Bloom made our celebration truly special.</div>
+                    <div class="testimonial-author">Sarah & Michael</div>
+                    <div class="testimonial-context">Anniversary</div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-quote">My daughter's birthday cake exceeded all expectations. The attention to detail and the quality of ingredients really shine through. We'll definitely be ordering again.</div>
+                    <div class="testimonial-author">Jessica T.</div>
+                    <div class="testimonial-context">Birthday</div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-quote">We ordered a custom wedding cake and it was a work of art. Every layer was delicious, and our guests couldn't stop talking about it. Truly remarkable craftsmanship.</div>
+                    <div class="testimonial-author">Emily & David</div>
+                    <div class="testimonial-context">Wedding</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Place Your Order</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="contact-wrapper">
+                <form class="contact-form" id="contact-form" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date Needed</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Tell Us About Your Cake</label>
+                        <textarea id="message" name="message" required placeholder="Share your ideas, flavor preferences, dietary needs, or any special requests."></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Sugar & Bloom. Handcrafted with intention. | Open by appointment | <a href="#">hello@sugarandbloom.local</a></p>
+    </footer>
+
+    <script>
+        let currentQuestion = 0;
+        let answers = {};
+
+        const recommendations = {
+            'Birthday-Chocolate-Under $50': {
+                name: 'Classic Chocolate Dream',
+                description: 'A rich and timeless choice for birthday celebrations. Our dark chocolate layers with silky ganache create a moment of pure indulgence.',
+                price: '$45'
+            },
+            'Birthday-Vanilla-Under $50': {
+                name: 'Vanilla Elegance',
+                description: 'Light, refined, and perfect for a birthday. Vanilla layers with fresh berries offer a sophisticated celebration.',
+                price: '$50'
+            },
+            'Birthday-Red Velvet-$50–$100': {
+                name: 'Red Velvet Romance',
+                description: 'Make the birthday moment truly special. Our red velvet is a showstopper—beautiful and delicious.',
+                price: '$65'
+            },
+            'Birthday-Lemon-$50–$100': {
+                name: 'Lemon Sunshine',
+                description: 'Bright and joyful. Perfect for bringing warmth to any birthday celebration with vibrant lemon flavor.',
+                price: '$55'
+            },
+            'Birthday-Surprise Me-$100–$200': {
+                name: 'Surprise Sensation',
+                description: 'Let us create something extraordinary for your birthday. We\'ll choose our finest seasonal creation.',
+                price: '$60'
+            },
+            'Wedding-Red Velvet-$100–$200': {
+                name: 'Red Velvet Romance',
+                description: 'Romantic and elegant for your most important day. Red velvet is a beloved choice for weddings.',
+                price: '$65'
+            },
+            'Wedding-Chocolate-$100–$200': {
+                name: 'Wedding Masterpiece',
+                description: 'Custom multi-tiered elegance for your perfect day. We craft this to match your vision exactly.',
+                price: '$180+'
+            },
+            'Wedding-Surprise Me-$200+': {
+                name: 'Wedding Masterpiece',
+                description: 'Let us create something truly extraordinary for your wedding. Premium design with our finest craftsmanship.',
+                price: '$180+'
+            },
+            'Anniversary-Red Velvet-$50–$100': {
+                name: 'Red Velvet Romance',
+                description: 'Celebrate your love story with our romantic red velvet. The perfect choice for anniversaries.',
+                price: '$65'
+            },
+            'Anniversary-Chocolate-$50–$100': {
+                name: 'Classic Chocolate Dream',
+                description: 'A classic choice for enduring love. Rich, indulgent, made with care.',
+                price: '$45'
+            },
+            'Just Because-Vanilla-Under $50': {
+                name: 'Vanilla Elegance',
+                description: 'Sometimes you deserve something sweet. This delightful vanilla cake is the perfect reason to celebrate.',
+                price: '$50'
+            },
+            'Just Because-Surprise Me-Under $50': {
+                name: 'Surprise Sensation',
+                description: 'You deserve a surprise. Let us pick something special, made just for you.',
+                price: '$60'
+            }
+        };
+
+        const defaultRecommendation = {
+            name: 'A Custom Creation',
+            description: 'Based on your preferences, we\'d love to create something custom for you. Please get in touch through our contact form—let\'s discuss your perfect cake.',
+            price: 'Custom Quote'
+        };
+
+        function selectOption(button) {
+            const parent = button.parentElement;
+            const siblings = parent.querySelectorAll('.option-btn');
+            siblings.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            answers[currentQuestion] = button.getAttribute('data-answer');
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < 2) {
+                currentQuestion++;
+                updateProgress();
+                showQuestion();
+            } else {
+                showRecommendation();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateProgress();
+                showQuestion();
+            }
+        }
+
+        function updateProgress() {
+            document.getElementById('current-step').textContent = currentQuestion + 1;
+            for (let i = 0; i < 3; i++) {
+                const prog = document.getElementById(`prog-${i + 1}`);
+                prog.classList.remove('active', 'completed');
+                if (i < currentQuestion) {
+                    prog.classList.add('completed');
+                } else if (i === currentQuestion) {
+                    prog.classList.add('active');
+                }
+            }
+        }
+
+        function showQuestion() {
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('visible'));
+            document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('visible');
+
+            document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'block' : 'none';
+            document.getElementById('nextBtn').textContent = currentQuestion === 2 ? 'See Recommendation' : 'Next';
+            document.getElementById('nextBtn').disabled = !answers[currentQuestion];
+
+            if (answers[currentQuestion]) {
+                const options = document.querySelectorAll(`[data-question="${currentQuestion}"] .option-btn`);
+                options.forEach(opt => {
+                    if (opt.getAttribute('data-answer') === answers[currentQuestion]) {
+                        opt.classList.add('selected');
+                    }
+                });
+            }
+        }
+
+        function showRecommendation() {
+            const key = `${answers[0]}-${answers[1]}-${answers[2]}`;
+            const rec = recommendations[key] || defaultRecommendation;
+
+            document.getElementById('recommendationBox').innerHTML = `
+                <div class="rec-label">Our Recommendation</div>
+                <div class="rec-title">${rec.name}</div>
+                <div class="rec-description">${rec.description}</div>
+                <div class="rec-price">${rec.price}</div>
+            `;
+
+            document.getElementById('quiz-buttons').classList.add('hidden');
+            document.getElementById('recommendation-section').classList.remove('hidden');
+            document.getElementById('result-buttons').style.display = 'flex';
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('visible'));
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            document.getElementById('recommendation-section').classList.add('hidden');
+            document.getElementById('result-buttons').style.display = 'none';
+            document.getElementById('quiz-buttons').classList.remove('hidden');
+            updateProgress();
+            showQuestion();
+        }
+
+        function scrollToMenu() {
+            document.getElementById('menu-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = 'Thank you. We\'ll be in touch within 24 hours.';
+            document.body.appendChild(toast);
+
+            document.getElementById('contact-form').reset();
+
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                selectOption(this);
+            });
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+        document.getElementById('prevBtn').addEventListener('click', previousQuestion);
+
+        updateProgress();
+        showQuestion();
+    </script>
+</body>
+</html>

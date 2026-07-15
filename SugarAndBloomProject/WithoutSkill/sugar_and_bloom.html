@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugar & Bloom - Handcrafted Cakes for Life's Sweetest Moments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f5e6d3 0%, #f9f1e8 100%);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4517f;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #d4517f;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f5e6d3 0%, #f9f1e8 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #d4517f;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #d4517f;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b83d68;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #d4517f;
+            border: 2px solid #d4517f;
+        }
+
+        .btn-secondary:hover {
+            background: #f5e6d3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 20px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            color: #d4517f;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: #faf7f2;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .quiz-question.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-question h3 {
+            color: #d4517f;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            padding: 15px;
+            background: #f5e6d3;
+            border: 2px solid #e8d4c4;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .option-btn:hover {
+            background: #d4517f;
+            color: white;
+            border-color: #d4517f;
+        }
+
+        .quiz-progress {
+            background: #e8d4c4;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-bar {
+            background: #d4517f;
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .recommendation {
+            display: none;
+            text-align: center;
+        }
+
+        .recommendation.active {
+            display: block;
+        }
+
+        .recommendation h3 {
+            color: #d4517f;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .cake-card-featured {
+            background: linear-gradient(135deg, #f5e6d3 0%, #f9f1e8 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cake-card-featured h4 {
+            color: #d4517f;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .cake-card-featured p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .cake-price {
+            font-size: 18px;
+            color: #d4517f;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .reset-quiz {
+            background: #d4517f;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .cake-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .cake-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cake-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f5e6d3 0%, #f9f1e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .cake-info {
+            padding: 20px;
+        }
+
+        .cake-info h3 {
+            color: #d4517f;
+            margin-bottom: 10px;
+        }
+
+        .cake-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .cake-price-menu {
+            color: #d4517f;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            background: #faf7f2;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #d4517f;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e8d4c4;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #d4517f;
+            box-shadow: 0 0 0 3px rgba(212, 81, 127, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #d4517f;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .form-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <div class="logo">🌸 Sugar & Bloom</div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('quiz')">Quiz</a></li>
+                <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                <li><a onclick="scrollToSection('reviews')">Reviews</a></li>
+                <li><a onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Sugar & Bloom</h1>
+        <p>Handcrafted cakes for life's sweetest moments</p>
+        <div class="cta-buttons">
+            <button class="btn-primary" onclick="scrollToSection('quiz')">Take The Quiz</button>
+            <button class="btn-secondary" onclick="scrollToSection('menu')">View Our Menu</button>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="container">
+            <h2>Find Your Perfect Cake</h2>
+            <div class="quiz-container">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+
+                <!-- Question 1: Occasion -->
+                <div class="quiz-question active" id="q1">
+                    <h3>What's the occasion? 🎉</h3>
+                    <div class="quiz-options">
+                        <button class="option-btn" onclick="selectAnswer('occasion', 'Birthday')">Birthday</button>
+                        <button class="option-btn" onclick="selectAnswer('occasion', 'Wedding')">Wedding</button>
+                        <button class="option-btn" onclick="selectAnswer('occasion', 'Anniversary')">Anniversary</button>
+                        <button class="option-btn" onclick="selectAnswer('occasion', 'Just Because')">Just Because</button>
+                    </div>
+                </div>
+
+                <!-- Question 2: Flavor -->
+                <div class="quiz-question" id="q2">
+                    <h3>What's your favorite flavor? 🍰</h3>
+                    <div class="quiz-options">
+                        <button class="option-btn" onclick="selectAnswer('flavor', 'Chocolate')">Chocolate</button>
+                        <button class="option-btn" onclick="selectAnswer('flavor', 'Vanilla')">Vanilla</button>
+                        <button class="option-btn" onclick="selectAnswer('flavor', 'Red Velvet')">Red Velvet</button>
+                        <button class="option-btn" onclick="selectAnswer('flavor', 'Lemon')">Lemon</button>
+                        <button class="option-btn" onclick="selectAnswer('flavor', 'Surprise Me')">Surprise Me</button>
+                    </div>
+                </div>
+
+                <!-- Question 3: Budget -->
+                <div class="quiz-question" id="q3">
+                    <h3>What's your budget? 💰</h3>
+                    <div class="quiz-options">
+                        <button class="option-btn" onclick="selectAnswer('budget', 'Under $50')">Under $50</button>
+                        <button class="option-btn" onclick="selectAnswer('budget', '$50–$100')">$50–$100</button>
+                        <button class="option-btn" onclick="selectAnswer('budget', '$100–$200')">$100–$200</button>
+                        <button class="option-btn" onclick="selectAnswer('budget', '$200+')">$200+</button>
+                    </div>
+                </div>
+
+                <!-- Recommendation -->
+                <div class="recommendation" id="recommendation">
+                    <h3>Your Perfect Cake! ✨</h3>
+                    <div class="cake-card-featured">
+                        <h4 id="recName"></h4>
+                        <p id="recDesc"></p>
+                        <div class="cake-price" id="recPrice"></div>
+                        <button class="btn-primary" onclick="scrollToSection('contact')">Order Now</button>
+                    </div>
+                    <button class="btn-secondary reset-quiz" onclick="resetQuiz()">Take Quiz Again</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <div class="menu-grid">
+                <div class="cake-card">
+                    <div class="cake-image">🍫</div>
+                    <div class="cake-info">
+                        <h3>Decadent Chocolate</h3>
+                        <p>Three layers of rich, velvety chocolate cake with dark chocolate ganache and chocolate shavings. Pure indulgence.</p>
+                        <div class="cake-price-menu">$55</div>
+                    </div>
+                </div>
+
+                <div class="cake-card">
+                    <div class="cake-image">🤍</div>
+                    <div class="cake-info">
+                        <h3>Vanilla Dream</h3>
+                        <p>Classic vanilla sponge with vanilla buttercream and fresh berries. Light, elegant, and perfectly timeless.</p>
+                        <div class="cake-price-menu">$50</div>
+                    </div>
+                </div>
+
+                <div class="cake-card">
+                    <div class="cake-image">❤️</div>
+                    <div class="cake-info">
+                        <h3>Red Velvet Romance</h3>
+                        <p>Luxurious red velvet cake with cream cheese frosting and subtle vanilla notes. Perfect for special moments.</p>
+                        <div class="cake-price-menu">$65</div>
+                    </div>
+                </div>
+
+                <div class="cake-card">
+                    <div class="cake-image">🍋</div>
+                    <div class="cake-info">
+                        <h3>Lemon Sunshine</h3>
+                        <p>Bright and zesty lemon cake with tangy lemon curd and fluffy lemon buttercream. Refreshingly delicious.</p>
+                        <div class="cake-price-menu">$55</div>
+                    </div>
+                </div>
+
+                <div class="cake-card">
+                    <div class="cake-image">✨</div>
+                    <div class="cake-info">
+                        <h3>Mystery Surprise</h3>
+                        <p>We'll create a custom flavor combination tailored to your taste. Let us surprise you with something magical!</p>
+                        <div class="cake-price-menu">$70</div>
+                    </div>
+                </div>
+
+                <div class="cake-card">
+                    <div class="cake-image">👑</div>
+                    <div class="cake-info">
+                        <h3>Grand Celebration</h3>
+                        <p>Our signature multi-layer creation with premium ingredients, custom decorations, and your choice of flavors.</p>
+                        <div class="cake-price-menu">$150+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"The Chocolate Decadence cake was absolutely perfect for my daughter's birthday! Everyone at the party couldn't stop raving about it. The quality is unmatched!"</p>
+                    <p class="review-author">— Sarah M.</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"We ordered three cakes for our wedding reception and they were stunning AND delicious. The team went above and beyond with the custom decorations. Highly recommend!"</p>
+                    <p class="review-author">— James & Emma</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"I'm obsessed with the Red Velvet Romance! I've ordered it for every special occasion this year. The attention to detail and fresh ingredients really shine through."</p>
+                    <p class="review-author">— Michelle T.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Place Your Order</h2>
+            <div class="contact-container">
+                <form id="contactForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateNeeded">Date Needed *</label>
+                        <input type="date" id="dateNeeded" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cake">Which cake are you interested in? *</label>
+                        <select id="cake" required>
+                            <option value="">Select a cake...</option>
+                            <option value="Decadent Chocolate">Decadent Chocolate - $55</option>
+                            <option value="Vanilla Dream">Vanilla Dream - $50</option>
+                            <option value="Red Velvet Romance">Red Velvet Romance - $65</option>
+                            <option value="Lemon Sunshine">Lemon Sunshine - $55</option>
+                            <option value="Mystery Surprise">Mystery Surprise - $70</option>
+                            <option value="Grand Celebration">Grand Celebration - $150+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Special Requests or Message *</label>
+                        <textarea id="message" required placeholder="Tell us about any customizations, dietary restrictions, or special requests..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Order Request</button>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Sugar & Bloom. All cakes are made fresh with love. 🌸</p>
+    </footer>
+
+    <script>
+        const cakeRecommendations = {
+            'Birthday-Chocolate-Under $50': {
+                name: 'Vanilla Dream',
+                desc: 'Perfect for birthday celebrations! Our classic vanilla cake is a crowd-pleaser that fits your budget beautifully.',
+                price: '$50'
+            },
+            'Birthday-Chocolate-$50–$100': {
+                name: 'Decadent Chocolate',
+                desc: 'Rich, decadent chocolate perfection for an unforgettable birthday celebration. Everyone loves chocolate!',
+                price: '$55'
+            },
+            'Birthday-Chocolate-$100–$200': {
+                name: 'Grand Celebration',
+                desc: 'Our premium multi-layer creation with custom decorations. Perfect for making birthdays truly special!',
+                price: 'From $150'
+            },
+            'Birthday-Chocolate-$200+': {
+                name: 'Grand Celebration',
+                desc: 'Our most luxurious creation with premium ingredients and full customization. A birthday to remember!',
+                price: 'From $150'
+            },
+            'Birthday-Vanilla-Under $50': {
+                name: 'Vanilla Dream',
+                desc: 'Classic and elegant! Our vanilla sponge cake is perfect for birthdays and won\'t break the bank.',
+                price: '$50'
+            },
+            'Birthday-Vanilla-$50–$100': {
+                name: 'Red Velvet Romance',
+                desc: 'Elegant red velvet with cream cheese frosting. A sophisticated choice for a special birthday!',
+                price: '$65'
+            },
+            'Birthday-Vanilla-$100–$200': {
+                name: 'Grand Celebration',
+                desc: 'Create something truly custom for the birthday person! Our premium tier allows full personalization.',
+                price: 'From $150'
+            },
+            'Birthday-Vanilla-$200+': {
+                name: 'Grand Celebration',
+                desc: 'No limits! Our top-tier creation with premium ingredients, custom designs, and unforgettable taste.',
+                price: 'Custom pricing'
+            },
+            'Wedding-Red Velvet-$100–$200': {
+                name: 'Red Velvet Romance',
+                desc: 'Elegant and romantic! Our red velvet is perfect for wedding celebrations with its sophisticated taste.',
+                price: '$65'
+            },
+            'Wedding-Red Velvet-$200+': {
+                name: 'Grand Celebration',
+                desc: 'Your dream wedding cake! Multi-tier, custom-designed, with premium ingredients and your choice of flavors.',
+                price: 'Custom pricing'
+            },
+            'Wedding-Vanilla-$100–$200': {
+                name: 'Grand Celebration',
+                desc: 'Timeless elegance for your special day. Our multi-layer creation can be customized to perfection.',
+                price: 'From $150'
+            },
+            'Wedding-Vanilla-$200+': {
+                name: 'Grand Celebration',
+                desc: 'Your perfect wedding cake awaits! We create stunning, custom multi-tier cakes with premium quality.',
+                price: 'Custom pricing'
+            },
+            'Anniversary-Red Velvet-$50–$100': {
+                name: 'Red Velvet Romance',
+                desc: 'Celebrate your love with our romantic red velvet! Perfect for anniversaries that deserve something special.',
+                price: '$65'
+            },
+            'Anniversary-Red Velvet-$100–$200': {
+                name: 'Grand Celebration',
+                desc: 'A custom anniversary cake that celebrates your unique love story. Premium quality and stunning presentation.',
+                price: 'From $150'
+            },
+            'Anniversary-Chocolate-$50–$100': {
+                name: 'Decadent Chocolate',
+                desc: 'Rich chocolate indulgence for two! Perfect for celebrating another year of sweetness together.',
+                price: '$55'
+            },
+            'Anniversary-Chocolate-$100–$200': {
+                name: 'Grand Celebration',
+                desc: 'Mark your milestone with our premium creation. Custom designs and flavors to celebrate your love.',
+                price: 'From $150'
+            },
+            'Just Because-Lemon-Under $50': {
+                name: 'Lemon Sunshine',
+                desc: 'Bright and cheerful! Our zesty lemon cake is perfect for "just because" moments of joy.',
+                price: '$55'
+            },
+            'Just Because-Lemon-$50–$100': {
+                name: 'Mystery Surprise',
+                desc: 'Let us surprise you! Our mystery flavor is perfect for adventurous "just because" celebrations.',
+                price: '$70'
+            },
+            'Just Because-Surprise Me-Under $50': {
+                name: 'Vanilla Dream',
+                desc: 'Our classic favorite! You can\'t go wrong with this timeless choice for a simple moment of joy.',
+                price: '$50'
+            },
+            'Just Because-Surprise Me-$50–$100': {
+                name: 'Mystery Surprise',
+                desc: 'We\'ll surprise you with something delightful! Perfect when you\'re feeling adventurous.',
+                price: '$70'
+            }
+        };
+
+        let currentQuestion = 1;
+        let answers = {};
+
+        function selectAnswer(category, value) {
+            answers[category] = value;
+            updateProgress();
+
+            if (category === 'occasion') {
+                showQuestion(2);
+            } else if (category === 'flavor') {
+                showQuestion(3);
+            } else if (category === 'budget') {
+                showRecommendation();
+            }
+        }
+
+        function showQuestion(questionNum) {
+            document.getElementById(`q${currentQuestion}`).classList.remove('active');
+            currentQuestion = questionNum;
+            document.getElementById(`q${currentQuestion}`).classList.add('active');
+        }
+
+        function updateProgress() {
+            const answered = Object.keys(answers).length;
+            const progress = (answered / 3) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showRecommendation() {
+            document.getElementById(`q${currentQuestion}`).classList.remove('active');
+            document.getElementById('recommendation').classList.add('active');
+
+            const key = `${answers.occasion}-${answers.flavor}-${answers.budget}`;
+            const rec = cakeRecommendations[key] || getDefaultRecommendation(answers);
+
+            document.getElementById('recName').textContent = rec.name;
+            document.getElementById('recDesc').textContent = rec.desc;
+            document.getElementById('recPrice').textContent = rec.price;
+        }
+
+        function getDefaultRecommendation(ans) {
+            const defaults = {
+                'Birthday': { name: 'Vanilla Dream', desc: 'Our classic favorite for celebrations!', price: '$50' },
+                'Wedding': { name: 'Grand Celebration', desc: 'Premium custom creation for your special day!', price: 'From $150' },
+                'Anniversary': { name: 'Red Velvet Romance', desc: 'Romantic and elegant for your special milestone!', price: '$65' },
+                'Just Because': { name: 'Mystery Surprise', desc: 'Let us create something delightful for you!', price: '$70' }
+            };
+            return defaults[ans.occasion] || { name: 'Grand Celebration', desc: 'Custom creation just for you!', price: 'Custom pricing' };
+        }
+
+        function resetQuiz() {
+            currentQuestion = 1;
+            answers = {};
+            document.getElementById('recommendation').classList.remove('active');
+            document.getElementById('q1').classList.add('active');
+            document.getElementById('progressBar').style.width = '0%';
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const dateNeeded = document.getElementById('dateNeeded').value;
+            const cake = document.getElementById('cake').value;
+            const message = document.getElementById('message').value;
+
+            const formMessage = document.getElementById('formMessage');
+
+            if (!name || !email || !phone || !dateNeeded || !cake || !message) {
+                formMessage.textContent = 'Please fill in all required fields.';
+                formMessage.className = 'form-message error';
+                return;
+            }
+
+            formMessage.textContent = `Thank you, ${name}! Your order request has been received. We'll contact you at ${email} or ${phone} within 24 hours to confirm your order for ${cake} on ${dateNeeded}. We can't wait to create something delicious for you! 🎉`;
+            formMessage.className = 'form-message success';
+
+            document.getElementById('contactForm').reset();
+
+            setTimeout(() => {
+                formMessage.className = 'form-message';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
