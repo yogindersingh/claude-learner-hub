@@ -2,6 +2,7 @@
 
 A personal learning repository for learning claude-code.
 
+
 ## Projects
 
 ### SugarAndBloomProject — Landing Page
