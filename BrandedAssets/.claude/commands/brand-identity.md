@@ -1,10 +1,10 @@
 ---
-name: Kai Lens Studio Brand Identity
+name: brand-identity
 description: Complete brand guidelines for Kai Lens Studio — apply to all content in this project
 type: reference
 ---
 
-# Kai Lens Studio Brand Identity
+# brand-identity
 
 ## Business Essentials
 - **Business Name:** Kai Lens Studio
