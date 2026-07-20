@@ -33,6 +33,16 @@ Demonstrates a project-scoped custom command that pins brand guidelines so every
 Key takeaway: putting brand rules in a slash command turns "please remember our brand" into a repeatable, single-invocation instruction — useful for teams producing repeated marketing collateral.
 
 
+## Claude Code Plugins & Skills — Quick Primer
+
+Claude Code can be extended in two main ways:
+
+- **Skills** — packaged instructions (and optionally scripts/assets) that teach Claude how to do a specific kind of task well. Loaded on demand when the task matches. Example: `frontend-design` improves visual polish for HTML/CSS work. Sourced from repos like [anthropics/skills](https://github.com/anthropics/skills) and pinned via a `skills-lock.json` in the project.
+- **Plugins** — bundles that ship one or more of: skills, slash commands, hooks, agents, and MCP servers. Installed once, they add reusable capabilities across projects. Slash commands (e.g. `/brand-identity` in this repo) are the lightest form and can live directly under `.claude/commands/` without a full plugin.
+
+Rule of thumb: reach for a **slash command** for a repeatable prompt, a **skill** to change *how* Claude approaches a category of work, and a **plugin** to distribute a set of these together.
+
+
 ## Repository Layout
 
 ```
