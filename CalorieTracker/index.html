@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-light: #81C784;
+            --danger-color: #f44336;
+            --warning-color: #ff9800;
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-primary: #212121;
+            --text-secondary: #757575;
+            --border-color: #e0e0e0;
+            --success-green: #4CAF50;
+            --warning-yellow: #ff9800;
+            --danger-red: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .header-date {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        /* Summary Section */
+        .summary {
+            text-align: center;
+        }
+
+        .summary-item {
+            margin-bottom: 20px;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .progress-container {
+            margin: 25px 0 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success-green);
+            transition: width 0.3s ease, background-color 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .progress-fill.warning {
+            background-color: var(--warning-yellow);
+        }
+
+        .progress-fill.danger {
+            background-color: var(--danger-red);
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .goal-input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .goal-input-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .goal-input-group input {
+            width: 80px;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .goal-input-group button {
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .goal-input-group button:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Form Section */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group input[type="date"] {
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Entries Section */
+        .entries-section {
+            grid-column: 1 / -1;
+        }
+
+        .meal-category {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #fafafa;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 6px;
+        }
+
+        .meal-category-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .entry-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background-color: white;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        .entry-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .entry-info {
+            flex: 1;
+        }
+
+        .entry-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .entry-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .entry-calories {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .btn-delete {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #da190b;
+        }
+
+        .category-total {
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+
+        .no-entries {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            grid-column: 1 / -1;
+        }
+
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 250px;
+            margin-top: 20px;
+            padding: 20px 10px;
+            background-color: #fafafa;
+            border-radius: 8px;
+        }
+
+        .chart-bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 40px;
+        }
+
+        .chart-bar {
+            width: 100%;
+            background: linear-gradient(to top, var(--primary-color), var(--primary-light));
+            border-radius: 4px 4px 0 0;
+            transition: background 0.3s ease;
+            min-height: 4px;
+            position: relative;
+        }
+
+        .chart-bar:hover {
+            background: linear-gradient(to top, var(--primary-light), var(--primary-color));
+        }
+
+        .chart-label {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+            width: 100%;
+        }
+
+        .chart-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .chart-empty {
+            text-align: center;
+            color: var(--text-secondary);
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍎 Calorie Tracker</h1>
+            <div class="header-date" id="currentDate"></div>
+        </div>
+
+        <div class="main-layout">
+            <!-- Summary Section -->
+            <div class="card summary">
+                <h2 class="section-title">Today's Summary</h2>
+                <div class="summary-item">
+                    <div class="summary-label">Daily Goal</div>
+                    <div class="summary-value" id="goalValue">2000</div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-label">Consumed</div>
+                    <div class="summary-value" id="consumedValue">0</div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-label">Remaining</div>
+                    <div class="summary-value" id="remainingValue">2000</div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0% of daily goal</div>
+                </div>
+
+                <div class="goal-input-group">
+                    <label for="dailyGoal">Daily Goal (cal):</label>
+                    <input type="number" id="dailyGoal" value="2000" min="500" max="10000">
+                    <button onclick="updateGoal()">Update</button>
+                </div>
+            </div>
+
+            <!-- Add Food Form -->
+            <div class="card">
+                <h2 class="section-title">Add Food Entry</h2>
+                <form id="foodForm" onsubmit="addEntry(event)">
+                    <div class="form-group">
+                        <label for="foodName">Food Name</label>
+                        <input type="text" id="foodName" placeholder="e.g., Chicken Breast" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="calorieValue">Calories</label>
+                        <input type="number" id="calorieValue" placeholder="e.g., 165" min="0" max="5000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mealCategory">Meal Category</label>
+                        <select id="mealCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Dinner">Dinner</option>
+                            <option value="Snacks">Snacks</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="entryDate">Date</label>
+                        <input type="date" id="entryDate" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Add Entry</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Today's Entries Section -->
+        <div class="card entries-section">
+            <h2 class="section-title">Today's Entries</h2>
+            <div id="entriesList"></div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="card chart-section">
+            <h2 class="section-title">7-Day History</h2>
+            <div class="chart-container" id="chartContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY_ENTRIES = 'calorieTracker_entries';
+        const STORAGE_KEY_GOAL = 'calorieTracker_goal';
+        const MEAL_CATEGORIES = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+
+        // Initialize app
+        function init() {
+            setDateInputDefaults();
+            loadAndRender();
+        }
+
+        // Set default date to today
+        function setDateInputDefaults() {
+            const today = getTodayDateString();
+            document.getElementById('entryDate').value = today;
+            document.getElementById('currentDate').textContent = formatDateDisplay(today);
+        }
+
+        // Get today's date as YYYY-MM-DD
+        function getTodayDateString() {
+            const today = new Date();
+            return today.toISOString().split('T')[0];
+        }
+
+        // Format date for display
+        function formatDateDisplay(dateStr) {
+            const date = new Date(dateStr + 'T00:00:00');
+            return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const entries = JSON.parse(localStorage.getItem(STORAGE_KEY_ENTRIES) || '[]');
+            const goal = parseInt(localStorage.getItem(STORAGE_KEY_GOAL) || '2000');
+            return { entries, goal };
+        }
+
+        // Save data to localStorage
+        function saveData(entries, goal) {
+            localStorage.setItem(STORAGE_KEY_ENTRIES, JSON.stringify(entries));
+            localStorage.setItem(STORAGE_KEY_GOAL, goal.toString());
+        }
+
+        // Generate unique ID
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        // Add new entry
+        function addEntry(event) {
+            event.preventDefault();
+            const { entries, goal } = loadData();
+
+            const newEntry = {
+                id: generateId(),
+                date: document.getElementById('entryDate').value,
+                name: document.getElementById('foodName').value.trim(),
+                calories: parseInt(document.getElementById('calorieValue').value),
+                category: document.getElementById('mealCategory').value
+            };
+
+            entries.push(newEntry);
+            saveData(entries, goal);
+            document.getElementById('foodForm').reset();
+            setDateInputDefaults();
+            loadAndRender();
+        }
+
+        // Delete entry
+        function deleteEntry(id) {
+            const { entries, goal } = loadData();
+            const filtered = entries.filter(e => e.id !== id);
+            saveData(filtered, goal);
+            loadAndRender();
+        }
+
+        // Update daily goal
+        function updateGoal() {
+            const newGoal = parseInt(document.getElementById('dailyGoal').value);
+            if (newGoal < 500 || newGoal > 10000) {
+                alert('Goal must be between 500 and 10000 calories');
+                return;
+            }
+            const { entries } = loadData();
+            saveData(entries, newGoal);
+            loadAndRender();
+        }
+
+        // Get entries for a specific date
+        function getEntriesByDate(dateStr) {
+            const { entries } = loadData();
+            return entries.filter(e => e.date === dateStr);
+        }
+
+        // Calculate total calories for a date
+        function getTotalCaloriesByDate(dateStr) {
+            return getEntriesByDate(dateStr).reduce((sum, e) => sum + e.calories, 0);
+        }
+
+        // Render summary section
+        function renderSummary() {
+            const { goal } = loadData();
+            const today = getTodayDateString();
+            const consumed = getTotalCaloriesByDate(today);
+            const remaining = Math.max(0, goal - consumed);
+            const percentage = Math.min(100, Math.round((consumed / goal) * 100));
+
+            document.getElementById('goalValue').textContent = goal;
+            document.getElementById('consumedValue').textContent = consumed;
+            document.getElementById('remainingValue').textContent = remaining;
+            document.getElementById('dailyGoal').value = goal;
+
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.classList.remove('warning', 'danger');
+            if (percentage >= 100) {
+                progressFill.classList.add('danger');
+            } else if (percentage >= 80) {
+                progressFill.classList.add('warning');
+            }
+
+            document.getElementById('progressText').textContent = percentage + '% of daily goal';
+        }
+
+        // Render today's entries grouped by meal category
+        function renderEntries() {
+            const today = getTodayDateString();
+            const todayEntries = getEntriesByDate(today);
+            const entriesList = document.getElementById('entriesList');
+
+            if (todayEntries.length === 0) {
+                entriesList.innerHTML = '<div class="no-entries">No entries for today. Add one to get started!</div>';
+                return;
+            }
+
+            let html = '';
+            for (const category of MEAL_CATEGORIES) {
+                const categoryEntries = todayEntries.filter(e => e.category === category);
+                if (categoryEntries.length === 0) continue;
+
+                const categoryTotal = categoryEntries.reduce((sum, e) => sum + e.calories, 0);
+
+                html += `<div class="meal-category">
+                    <div class="meal-category-title">${category}</div>`;
+
+                for (const entry of categoryEntries) {
+                    html += `<div class="entry-item">
+                        <div class="entry-info">
+                            <div class="entry-name">${escapeHtml(entry.name)}</div>
+                            <div class="entry-date">${formatDateDisplay(entry.date)}</div>
+                        </div>
+                        <div class="entry-calories">${entry.calories}</div>
+                        <button type="button" class="btn-delete" onclick="deleteEntry('${entry.id}')">Delete</button>
+                    </div>`;
+                }
+
+                html += `<div class="category-total">${category} Total: ${categoryTotal} cal</div>
+                </div>`;
+            }
+
+            entriesList.innerHTML = html;
+        }
+
+        // Render 7-day chart
+        function renderChart() {
+            const { goal } = loadData();
+            const chartContainer = document.getElementById('chartContainer');
+            const today = new Date();
+            const days = [];
+
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                days.push(date.toISOString().split('T')[0]);
+            }
+
+            const maxCalories = Math.max(goal, ...days.map(d => getTotalCaloriesByDate(d)));
+
+            if (maxCalories === 0) {
+                chartContainer.innerHTML = '<div class="chart-empty">No data yet. Add entries to see your chart!</div>';
+                return;
+            }
+
+            let html = '';
+            for (const dateStr of days) {
+                const calories = getTotalCaloriesByDate(dateStr);
+                const heightPercent = (calories / maxCalories) * 100;
+                const date = new Date(dateStr + 'T00:00:00');
+                const dayLabel = date.toLocaleDateString('en-US', { weekday: 'short' });
+
+                html += `<div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: ${heightPercent}%;">
+                        <div class="chart-value">${calories}</div>
+                    </div>
+                    <div class="chart-label">${dayLabel}</div>
+                </div>`;
+            }
+
+            chartContainer.innerHTML = html;
+        }
+
+        // Escape HTML for security
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load and render all sections
+        function loadAndRender() {
+            renderSummary();
+            renderEntries();
+            renderChart();
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
