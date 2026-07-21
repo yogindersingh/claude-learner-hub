@@ -43,6 +43,11 @@ Claude Code can be extended in two main ways:
 Rule of thumb: reach for a **slash command** for a repeatable prompt, a **skill** to change *how* Claude approaches a category of work, and a **plugin** to distribute a set of these together.
 
 
+## Claude's Context Window
+
+Claude models process text within a **context window**—the maximum amount of text Claude can consider at once. Within Claude Code, your conversation history is automatically compressed as it grows, enabling unlimited-length sessions. However, for API applications, keep context limits in mind when designing prompts and managing conversation history.
+
+
 ## Repository Layout
 
 ```
