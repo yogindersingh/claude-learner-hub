@@ -19,8 +19,12 @@ Key takeaway: the `frontend-design` skill produced noticeably more polished visu
 Open in a browser:
 
 ```bash
+# SugarAndBloomProject comparison
 open SugarAndBloomProject/WithoutSkill/sugar_and_bloom.html
 open SugarAndBloomProject/WithFrontEndDesignSkill/sugar_and_bloom_v2.html
+
+# CalorieTracker application
+open CalorieTracker/index.html
 ```
 
 ### BrandedAssets — Custom slash command for brand consistency
@@ -31,6 +35,15 @@ Demonstrates a project-scoped custom command that pins brand guidelines so every
 - `BrandedAssets/priya-james-followup-email.html` — a follow-up email generated against those guidelines, showing Deep Navy / Warm Sand / Antique Gold palette and Cormorant Garamond + Nunito Sans typography applied consistently.
 
 Key takeaway: putting brand rules in a slash command turns "please remember our brand" into a repeatable, single-invocation instruction — useful for teams producing repeated marketing collateral.
+
+### CalorieTracker — Interactive web application
+
+A full-featured calorie tracking web application built with HTML, CSS, and JavaScript. Demonstrates building functional, stateful applications with Claude Code.
+
+- `CalorieTracker/index.html` — single-file interactive app with meal logging, daily tracking, and calorie calculations
+- Features: add/remove meals, persistent session data, responsive design
+
+Key takeaway: Claude can generate complete interactive applications as single HTML files with embedded logic and styling, ready to use immediately.
 
 
 ## Claude Code Plugins & Skills — Quick Primer
@@ -59,7 +72,9 @@ Claude models process text within a **context window**—the maximum amount of t
 │   └── WithFrontEndDesignSkill/
 │       ├── sugar_and_bloom_v2.html
 │       └── skills-lock.json
-└── BrandedAssets/
-    ├── .claude/commands/brand-identity.md       # /brand-identity slash command
-    └── priya-james-followup-email.html          # Output produced with the command
+├── BrandedAssets/
+│   ├── .claude/commands/brand-identity.md       # /brand-identity slash command
+│   └── priya-james-followup-email.html          # Output produced with the command
+└── CalorieTracker/
+    └── index.html                               # Interactive calorie tracking application
 ```
