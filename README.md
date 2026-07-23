@@ -56,6 +56,18 @@ Claude Code can be extended in two main ways:
 Rule of thumb: reach for a **slash command** for a repeatable prompt, a **skill** to change *how* Claude approaches a category of work, and a **plugin** to distribute a set of these together.
 
 
+## Plugins Overview
+
+### Ralph Loop Plugin
+Enables automated task looping with configurable intervals. Useful for running recurring tasks, polling for status updates, or keeping processes running continuously. Perfect for CI/CD monitoring, deployment checks, or batch processing workflows.
+
+### Playwright Plugin
+Integrates browser automation capabilities into Claude Code. Allows Claude to interact with web applications programmatically—useful for testing, web scraping, automated testing workflows, and end-to-end validation of web applications.
+
+### Marketing Plugin
+Provides specialized tools and templates for marketing workflows. Includes capabilities for generating marketing copy, managing campaigns, content scheduling, and brand-aligned asset creation—streamlining the creation of consistent, on-brand marketing materials.
+
+
 ## Claude's Context Window
 
 Claude models process text within a **context window**—the maximum amount of text Claude can consider at once. Within Claude Code, your conversation history is automatically compressed as it grows, enabling unlimited-length sessions. However, for API applications, keep context limits in mind when designing prompts and managing conversation history.
